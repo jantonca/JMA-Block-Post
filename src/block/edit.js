@@ -1043,7 +1043,7 @@ export default compose( [
 		}
 		return {
 			customPosts: select( 'core' ).getEntityRecords( 'intermedia-blocks-post/v1', 'intermedia-blocks-posts', postsQuery ),
-			version: 'Intermedia Block Post // Version: 1.1.0',
+			version: 'Intermedia Block Post // Version: 1.5.0',
 		};
 	} ),
 ] )( Edit );
