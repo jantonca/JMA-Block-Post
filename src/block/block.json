@@ -1,0 +1,231 @@
+{
+	"title": "Intermedia Posts",
+	"icon": "admin-network",
+	"category": "intermedia-blocks",
+	"keywords": [
+		"Intermedia Posts",
+		"Display Posts",
+		"Intermedia"
+	],
+	"styles": [
+		{
+			"name": "default", 
+			"label": "Default",
+			"isDefault": true
+		},
+		{
+			"name": "contributor", 
+			"label": "Contributor"
+		},
+		{
+			"name": "borders", 
+			"label": "Borders"
+		}
+	],
+	"attributes": {
+		"className": {
+			"type": "string",
+			"default": ""
+		},
+		"template": {
+			"type": "string"
+		},
+		"postsAmount": {
+			"type": "number",
+			"default": 1
+		},
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"page": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "integer" }
+		},
+		"authors": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "integer" }
+		},
+		"categories": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "integer" }
+		},
+		"categoriesExclude": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "integer" }
+		},
+		"tags": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "integer" }
+		},
+		"tagsExclude": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "integer" }
+		},
+		"metaKey": {
+			"type": "string",
+			"default": ""
+		},
+		"metaValue": {
+			"type": "string",
+			"default": ""
+		},
+		"metaCompare": {
+			"type": "string",
+			"default": "="
+		},
+		"orderBy": {
+			"type": "string",
+			"default": "date"
+		},
+		"order": {
+			"type": "string",
+			"default": "desc"
+		},
+		"excerptLength": {
+			"type": "number",
+			"default": 55
+		},
+		"classesContainer": {
+			"type": "string"
+		},
+		"titleSection": {
+			"type": "string"
+		},
+		"displayFeaturedImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayPageTitle": {
+			"type": "boolean",
+			"default": false
+		},
+		"displayPageContent": {
+			"type": "boolean",
+			"default": false
+		},
+		"displayPageFeaturedImage": {
+			"type": "boolean",
+			"default": false
+		},
+		"displayCaption": {
+			"type": "boolean",
+			"default": false
+		},
+		"displayCategory": {
+			"type": "boolean",
+			"default": false
+		},
+		"imageShape": {
+			"type": "string",
+			"default": "landscape"
+		},
+		"displaySubtitle": {
+			"type": "boolean",
+			"default": false
+		},
+		"displayExcerpt": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayExcerptMore": {
+			"type": "boolean",
+			"default": true
+		},
+		"excerptReadMore": {
+			"type": "string",
+			"default": "Read more"
+		},
+		"displayAuthor": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayAuthorAvatar": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayDate": {
+			"type": "boolean",
+			"default": true
+		},
+		"contentAlignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"articleMinHeight": {
+			"type": "number",
+			"default": 0
+		},
+		"StyleInlineArticle": {
+			"type": "object",
+			"default": {
+				"minHeight": {
+					"type": "string",
+					"default": ""
+				},
+				"paddingTop": {
+					"type": "string",
+					"default": ""
+				}
+			}
+		},
+		"classesArticle": {
+			"type": "string"
+		},
+		"postsView": {
+			"type": "string",
+			"default": "list"
+		},
+		"columnsAmount": {
+			"type": "number",
+			"default": 3
+		},
+		"imageAlignment": {
+			"type": "string",
+			"default": "top"
+		},
+		"imageSize": {
+			"type": "number",
+			"default": 3
+		},
+		"headerColor": {
+			"type": "string",
+			"default": ""
+		  },
+		"customHeaderColor": {
+			"type": "string",
+			"default": ""
+		},
+		"textColor": {
+			"type": "string",
+			"default": ""
+		},
+		"customTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"fontSize": {
+			"type": "number",
+			"default": 4
+		},
+		"sponsoredContentMessage": {
+			"type": "string",
+			"default": "Sponsored by"
+		},
+		"sponsoredContentBadgeMessage": {
+			"type": "string",
+			"default": "Sponsored Content"
+		},
+		"displaySponsoredContentBadge": {
+			"type": "boolean",
+			"default": true
+		}
+	}
+
+}
