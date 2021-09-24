@@ -1047,9 +1047,12 @@
 }
 
 .wp-block-intermedia-block-post.is-type-sponsored_content {
-  .sponsored-content-badge span {
+  article {
+    margin-bottom: 0;
+    .sponsored-content-badge span {
       padding: 2px 5px;
       background-color: #ffe500;
       border-radius: 5px;
+  }
   }
 }

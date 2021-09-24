@@ -763,7 +763,9 @@
   .intermedia-post-articles.is-style-borders.columns-6 article:nth-of-type(6n) {
     border: 0; } }
 
-.wp-block-intermedia-block-post.is-type-sponsored_content .sponsored-content-badge span {
-  padding: 2px 5px;
-  background-color: #ffe500;
-  border-radius: 5px; }
+.wp-block-intermedia-block-post.is-type-sponsored_content article {
+  margin-bottom: 0; }
+  .wp-block-intermedia-block-post.is-type-sponsored_content article .sponsored-content-badge span {
+    padding: 2px 5px;
+    background-color: #ffe500;
+    border-radius: 5px; }
