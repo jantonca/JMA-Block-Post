@@ -8,13 +8,12 @@
 		
         /* BEGIN HTML OUTPUT */
         ob_start(); // Turn on output buffering
-		//var_dump($block);
+
         if ( $article_query->have_posts() ) :
 
 ?>
 		<div
 			class="<?php echo esc_attr( $block->classesContainer ); ?>"
-			style="<?php //echo esc_attr( $styles ); ?>"
 			>
 			<div class="container-box" data-posts>
 				<?php if ( isset( $block->titleSection ) ) : ?>

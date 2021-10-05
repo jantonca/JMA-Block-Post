@@ -10,7 +10,7 @@
 
 call_user_func(
 	function( $data ) {
-		//var_dump($data['attributes']);
+
 		global $wp_query;
 		$main_query = $wp_query;
         wp_reset_postdata();

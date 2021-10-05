@@ -47,14 +47,6 @@ class API_Block_Post {
 		if ( $params['post_in'] ) {
 			$args['post__in'] = $params['post_in'];
 		}
-		// if ( $params['include'] && count( $params['include'] ) ) {
-		// 	$args['post__in'] = $params['include'];
-		// 	$args['orderby']  = 'post__in';
-		// 	$args['order']    = 'ASC';
-		// }
-		// if ( $params['exclude'] && count( $params['exclude'] ) ) {
-		// 	$args['post__not_in'] = $params['exclude'];
-		// }
 		if ( $params['post_type'] && count( $params['post_type'] ) ) {
 			$args['post_type'] = $params['post_type'];
 		}
@@ -70,12 +62,6 @@ class API_Block_Post {
 		if ( $params['order'] ) {
 			$args['order'] = $params['order'];
 		}
-
-		// $block_attributes = [
-		// 	'showExcerpt'   => $params['show_excerpt'],
-		// 	'excerptLength' => $params['excerpt_length'],
-		// ];
-		//Newspack_Blocks::filter_excerpt_length( $block_attributes );
 
 		$query        = new WP_Query();
 		$query_result = $query->query( $args );
@@ -112,16 +98,6 @@ class API_Block_Post {
 				],
 			];
 
-			// $add_ons = [
-			// 	'newspack_article_classes'        => Newspack_Blocks::get_term_classes( $data['id'] ),
-			// 	'newspack_author_info'            => self::newspack_blocks_get_author_info( $data ),
-			// 	'newspack_category_info'          => self::newspack_blocks_get_primary_category( $data ),
-			// 	'newspack_featured_image_caption' => self::newspack_blocks_get_image_caption( $data ),
-			// 	'newspack_featured_image_src'     => self::newspack_blocks_get_image_src( $data ),
-			// 	'newspack_has_custom_excerpt'     => self::newspack_blocks_has_custom_excerpt( $data ),
-			// 	'newspack_post_format'            => self::newspack_blocks_post_format( $data ),
-			// 	'newspack_post_sponsors'          => self::newspack_blocks_sponsor_info( $data ),intermedia_blocks_get_cat_tag_classes
-			// ];
             $add_ons = [
                 'intermedia_featured_image_src'     => Block_helper::intermedia_blocks_get_image_src( $data ),
                 'intermedia_featured_image_caption' => Block_helper::intermedia_blocks_get_image_caption( $data ),
@@ -132,10 +108,7 @@ class API_Block_Post {
 			$posts[] = array_merge( $data, $add_ons );
 		}
 
-		//Newspack_Blocks::remove_excerpt_length_filter();
-
 		return new \WP_REST_Response( $posts );
 	}
 
 }
-//add_action( 'rest_api_init', array( 'API_Block_Post', 'register_rest_fields' ) );

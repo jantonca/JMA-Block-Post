@@ -7,7 +7,7 @@
  */
 call_user_func(
 	function( $data ) {
-		//var_dump($data['attributes']);
+
 		global $wp_query;
 		$main_query = $wp_query;
         wp_reset_postdata();
@@ -17,11 +17,11 @@ call_user_func(
 		global $newspack_blocks_post_id;
 		$post_counter = 0;
 		$template_name = isset( $attributes->template ) ? '-'.$attributes->template : '';
-		//$template_name = '-'.$attributes->className;
+
 		if ( $template_name === '-is-style-default' ) {
 			$template_name = '';
 		}
-		//var_dump($attributes);
+
 		while ( $article_query->have_posts() ) {
 
 			$article_query->the_post();

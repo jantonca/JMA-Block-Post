@@ -25,7 +25,6 @@ class Block_helper {
         $post_types = get_post_types(
             array(
                 'public'       => true,
-                // 'show_in_rest' => true,
             ),
             'objects'
         );
@@ -37,7 +36,7 @@ class Block_helper {
 			);
 		}
         foreach ( $post_types as $post_type ) {
-			//var_dump($post_type->name);
+
             if ( 'product' === $post_type->name ) {
                 continue;
             }

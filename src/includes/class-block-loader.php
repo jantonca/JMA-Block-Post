@@ -1,7 +1,6 @@
-
 <?php
-
 class Classes_loader {
+    
     /**
     * Constructor
     */
@@ -22,7 +21,7 @@ class Classes_loader {
      * @return void
     */
     public function load_plugin() {
-        //require_once UAGB_DIR . 'classes/class-uagb-core-plugin.php';
+
     }
 
 }

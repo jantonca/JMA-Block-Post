@@ -60,7 +60,6 @@ class IntermediaBlockPost {
         
         $args['post_type'] = $post_type;
         $args['posts_per_page'] = $posts_amount;
-        //$args['posts_per_page'] += count( $newspack_blocks_post_id );
 
         if ( count( $newspack_blocks_post_id ) ) {
             $args['post__not_in'] = array_merge(

@@ -72,12 +72,3 @@ class Api_Post_Feed {
 	}
 	
 }
-
-// add_filter( 'rest_post_query', function( $args, $request ){
-//     if ( $meta_key = $request->get_param( 'metaKey' ) ) {
-//         $args['meta_key'] = $meta_key;
-//         $args['meta_value'] = $request->get_param( 'metaValue' );
-// 		$args['meta_compare'] = $request->get_param( 'metaCompare' );
-//     }
-//     return $args;
-// }, 10, 2 );
