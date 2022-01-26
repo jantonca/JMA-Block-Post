@@ -1,5 +1,5 @@
 /**
- * BLOCK: intermedia-block-post
+ * BLOCK: jma-block-post
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
@@ -8,13 +8,13 @@
  * External dependencies
  */
 import { getCategories, setCategories } from '@wordpress/blocks';
-import { IntermediaLogo, BlockLogo } from '../intermedia-svg-logos';
+import { JMALogo, BlockLogo } from '../jma-svg-logos';
 /**
   * Internal dependencies
   */
 setCategories( [
-	...getCategories().filter( ( { slug } ) => slug !== 'intermedia-blocks' ),
-	{ slug: 'intermedia-blocks', title: 'Intermedia Blocks', icon: IntermediaLogo },
+	...getCategories().filter( ( { slug } ) => slug !== 'jma-blocks' ),
+	{ slug: 'jma-blocks', title: 'JMA Blocks', icon: JMALogo },
 ] );
 //  Import CSS.
 import './editor.scss';
@@ -38,7 +38,7 @@ import edit from './edit';
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'intermedia/block-post', {
+registerBlockType( 'jma/block-post', {
 	title,
 	icon: BlockLogo,
 	category,

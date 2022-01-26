@@ -9,11 +9,11 @@
 call_user_func(
 	function( $data ) {
 		$attributes = $data['attributes'];
-		$authors    = IntermediaBlockPost::display_authors();
+		$authors    = JMABlockPost::display_authors();
 		$classes    = array();
 		$styles     = '';
 		// Add classes based on the post's assigned categories and tags.
-		$classes[] = IntermediaBlockPost::get_term_classes( get_the_ID() );
+		$classes[] = JMABlockPost::get_term_classes( get_the_ID() );
 
 		// Add classes from attributes
         $classes[] = $attributes->classesArticle;
@@ -28,7 +28,7 @@ call_user_func(
 		}
 		$image_size = 'newspack-article-block-uncropped';
 		if ( has_post_thumbnail() && 'uncropped' !== $attributes->imageShape ) {
-			$image_size = IntermediaBlockPost::image_size_for_orientation( $attributes->imageShape );
+			$image_size = JMABlockPost::image_size_for_orientation( $attributes->imageShape );
 		}
 		$thumbnail_args = '';
 		// If the image position is behind, pass the object-fit setting to maintain styles with AMP.
@@ -66,17 +66,15 @@ call_user_func(
 
         if ( $text_color ) {
             $text_color = 'has-'.$text_color.'-color';
-            $text_color_class = 'class="'.$text_color.'"';
         } else {
             $text_color = '';
-            $text_color_class = '';
         }
 
         $custom_text_color = isset( $attributes->customTextColor ) ? $attributes->customTextColor : false;
         $excerpt_more_text = isset( $attributes->excerptReadMore ) ? $attributes->excerptReadMore : '';
 
         if ( $custom_text_color ) {
-            $text_color_style = 'style="color:'.$custom_text_color.';"';
+            $text_color_style = 'color:'.$custom_text_color.';';
         } else {
             $text_color_style ='';
         }
@@ -105,7 +103,7 @@ call_user_func(
             <?php endif; ?>
             >
             <?php if ( has_post_thumbnail() && $attributes->displayFeaturedImage && $attributes->imageShape ) : ?>
-                <figure class="post-thumbnail <?php echo $text_color; ?>">
+                <figure class="post-thumbnail <?php echo esc_attr( $text_color ); ?>">
                     <a href="<?php the_permalink(); ?>" rel="bookmark">
                     <?php the_post_thumbnail( $image_size, $thumbnail_args ); ?>
                     </a>
@@ -119,11 +117,11 @@ call_user_func(
             <div class="entry-wrapper">
                 <?php if ( $displaySponsoredContentBadge && get_post_type( get_the_ID() ) === 'sponsored_content' ) : ?>
                     <div class="sponsored-content-badge" >
-						<span><?php echo $attributes->sponsoredContentBadgeMessage ?></span>
+						<span><?php echo esc_html( $attributes->sponsoredContentBadgeMessage ) ?></span>
 					</div>
                 <?php endif; ?>
                 <?php if ( $showCategory && $category ) : ?>
-                    <div class="cat-links <?php echo $text_color; ?>" <?php echo $text_color_style; ?>>
+                    <div class="cat-links  <?php echo esc_attr( $text_color ); ?>" style="<?php echo esc_attr( $text_color_style ); ?>" >
                         <a href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>">
                             <?php echo esc_html( $category->name ); ?>
                         </a>
@@ -140,7 +138,7 @@ call_user_func(
                 <?php
                 if ( $show_subtitle ) : ?>
 
-                    <div class="newspack-post-subtitle newspack-post-subtitle--in-homepage-block <?php echo $text_color; ?>">
+                    <div class="newspack-post-subtitle newspack-post-subtitle--in-homepage-block <?php echo esc_attr( $text_color ); ?>">
                         <?php echo esc_html( get_post_meta( get_the_ID(), 'newspack_post_subtitle', true ) ); ?>
                     </div>
 
@@ -148,12 +146,14 @@ call_user_func(
                 <?php
                 if ( $attributes->displayExcerpt ) : ?>
 
-                    <p <?php echo $text_color_class; ?> <?php echo $text_color_style; ?> ><?php echo IntermediaBlockPost::intermedia_custom_excerpt( $attributes->excerptLength, $attributes->displayExcerptMore, $excerpt_more_text ); ?></p>
+                    <p class="<?php echo esc_attr( $text_color ); ?>" style="<?php echo esc_attr( $text_color_style ); ?>" >
+                        <?php echo JMABlockPost::jma_custom_excerpt( $attributes->excerptLength, $attributes->displayExcerptMore, $excerpt_more_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    </p>
 
                 <?php endif;
                 if ( $attributes->displayAuthor || $attributes->displayDate ) :
                     ?>
-                    <div class="entry-meta <?php echo $text_color; ?>" <?php echo $text_color_style; ?> >
+                    <div class="entry-meta <?php echo esc_attr( $text_color ); ?>" style="<?php echo esc_attr( $text_color_style ); ?>" >
                         <?php
                         if ( $attributes->displayAuthor ) :
                             if ( $attributes->displayAuthorAvatar ) :
@@ -208,11 +208,11 @@ call_user_func(
                 <?php endif; ?>
                 <?php if ( get_post_type( get_the_ID() ) === 'sponsored_content' ):
 
-                    $repeatable_fields = get_post_meta( get_the_ID(), 'intermedia_sponsored_content', true );
+                    $repeatable_fields = get_post_meta( get_the_ID(), 'jma_sponsored_content', true );
 
                 ?>
                     <div class="sponsored-content">
-                        <small><?php echo $attributes->sponsoredContentMessage ?> <span><strong><?php echo  $repeatable_fields[0]['name']; ?></strong></span></small>
+                        <small><?php echo esc_html( $attributes->sponsoredContentMessage ) ?> <span><strong><?php echo  esc_html( $repeatable_fields[0]['name'] ); ?></strong></span></small>
                     </div>
                 <?php endif; ?>
             </div><!-- .entry-wrapper -->

@@ -1,4 +1,4 @@
-function IntermediaLogo( props ) {
+function JMALogo( props ) {
 	return (
 		<svg
 			id="prefix__Layer_1"
@@ -62,4 +62,4 @@ function BlockLogo() {
 	);
 }
 
-export { IntermediaLogo, BlockLogo };
+export { JMALogo, BlockLogo };

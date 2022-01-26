@@ -1,11 +1,11 @@
 {
-	"title": "Intermedia Posts",
+	"title": "JMA Posts",
 	"icon": "admin-network",
-	"category": "intermedia-blocks",
+	"category": "jma-blocks",
 	"keywords": [
-		"Intermedia Posts",
+		"JMA Posts",
 		"Display Posts",
-		"Intermedia"
+		"JMA"
 	],
 	"styles": [
 		{

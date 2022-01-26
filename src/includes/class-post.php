@@ -54,8 +54,8 @@ class Post {
         ?>
 
         <figure class="post-thumbnail">
-            <a href="<?php echo $this->get_link(); ?>" rel="bookmark">
-                <img src="<?php echo $this->get_featured_image_src(); ?>" } class="wp-post-image" alt="#" />
+            <a href="<?php echo esc_url( $this->get_link() ); ?>" rel="bookmark">
+                <img src="<?php echo esc_url( $this->get_featured_image_src() ); ?>" } class="wp-post-image" alt="#" />
             </a>
         </figure>
         
@@ -97,7 +97,7 @@ class Post {
 
         ?>
 
-        <span class="date"><?php echo date_format( $date, "j F Y" ); ?></span>      
+        <span class="date"><?php echo esc_html( date_format( $date, "j F Y" ) ); ?></span>      
 
         <?php
 

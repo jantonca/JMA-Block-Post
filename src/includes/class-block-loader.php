@@ -1,6 +1,6 @@
 <?php
+
 class Classes_loader {
-    
     /**
     * Constructor
     */
@@ -21,7 +21,6 @@ class Classes_loader {
      * @return void
     */
     public function load_plugin() {
-
     }
 
 }

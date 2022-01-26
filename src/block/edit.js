@@ -44,15 +44,15 @@ const templates = styles.map( function( style ) {
 
 if (
 	typeof window === 'object' &&
-	window.intermediaGlobalObject &&
-	window.intermediaGlobalObject.subtitle_theme_support
+	window.jmaGlobalObject &&
+	window.jmaGlobalObject.subtitle_theme_support
 ) {
 	IS_SUBTITLE_SUPPORTED_IN_THEME = true;
 }
 if (
 	typeof window === 'object' &&
-	window.intermediaSponsoredContentGlobalObject &&
-	window.intermediaSponsoredContentGlobalObject.sponsored_content_support
+	window.jmaSponsoredContentGlobalObject &&
+	window.jmaSponsoredContentGlobalObject.sponsored_content_support
 ) {
 	IS_SPONSORED_CONTENT_SUPPORTED = true;
 }
@@ -90,13 +90,13 @@ const coverIcon = (
 		<Path d="M4 4h7V2H4c-1.1 0-2 .9-2 2v7h2V4zm6 9l-4 5h12l-3-4-2.03 2.71L10 13zm7-4.5c0-.83-.67-1.5-1.5-1.5S14 7.67 14 8.5s.67 1.5 1.5 1.5S17 9.33 17 8.5zM20 2h-7v2h7v7h2V4c0-1.1-.9-2-2-2zm0 18h-7v2h7c1.1 0 2-.9 2-2v-7h-2v7zM4 13H2v7c0 1.1.9 2 2 2h7v-2H4v-7z" />
 	</SVG>
 );
-//intermedia-block-post/v1/intermedia-blocks-posts
+//jma-block-post/v1/jma-blocks-posts
 const dispatch = wp.data.dispatch;
 dispatch( 'core' ).addEntities( [
 	{
-		name: 'intermedia-blocks-posts', // route name
-		kind: 'intermedia-blocks-post/v1', // namespace
-		baseURL: '/intermedia-block-post/v1/intermedia-blocks-posts', // API path without /wp-json
+		name: 'jma-blocks-posts', // route name
+		kind: 'jma-blocks-post/v1', // namespace
+		baseURL: '/jma-block-post/v1/jma-blocks-posts', // API path without /wp-json
 	},
 ] );
 class Edit extends Component {
@@ -140,10 +140,7 @@ class Edit extends Component {
 	renderExcerpt( post ) {
 		const { attributes } = this.props;
 		const { excerptLength, excerptReadMore, displayExcerptMore } = attributes;
-		let excerpt = post.excerpt.rendered;
-		const excerptElement = document.createElement( 'p' );
-		excerptElement.innerHTML = excerpt;
-		excerpt = excerptElement.textContent || excerptElement.innerText || '';
+		const excerpt = post.excerpt.rendered.replace( /(<([^>]+)>)/gi, '' );
 		const needsReadMore = excerptLength < excerpt.trim().split( ' ' ).length;
 		const postExcerpt = needsReadMore ? (
 			<Fragment>
@@ -181,7 +178,7 @@ class Edit extends Component {
 				) ),
 				// eslint-disable-next-line react/jsx-key
 				<span className="byline">
-					{ _x( 'by', 'post author', 'intermedia-blocks' ) }{ ' ' }
+					{ _x( 'by', 'post author', 'jma-blocks' ) }{ ' ' }
 					{ authorInfo.reduce( ( accumulator, author, index ) => {
 						return [
 							...accumulator,
@@ -191,7 +188,7 @@ class Edit extends Component {
 								</a>
 							</span>,
 							index < authorInfo.length - 2 && ', ',
-							authorInfo.length > 1 && index === authorInfo.length - 2 && _x( ' and ', 'post author', 'intermedia-blocks' ),
+							authorInfo.length > 1 && index === authorInfo.length - 2 && _x( ' and ', 'post author', 'jma-blocks' ),
 						];
 					}, [] ) }
 				</span>,
@@ -199,7 +196,7 @@ class Edit extends Component {
 		}
 		return (
 			<span className="byline">
-				{ _x( 'by', 'post author', 'intermedia-blocks' ) }{ ' ' }
+				{ _x( 'by', 'post author', 'jma-blocks' ) }{ ' ' }
 				{ authorInfo.reduce( ( accumulator, author, index ) => {
 					return [
 						...accumulator,
@@ -209,7 +206,7 @@ class Edit extends Component {
 							</a>
 						</span>,
 						index < authorInfo.length - 2 && ', ',
-						authorInfo.length > 1 && index === authorInfo.length - 2 && _x( ' and ', 'post author', 'intermedia-blocks' ),
+						authorInfo.length > 1 && index === authorInfo.length - 2 && _x( ' and ', 'post author', 'jma-blocks' ),
 					];
 				}, [] ) }
 			</span>
@@ -274,9 +271,9 @@ class Edit extends Component {
 			//'show-caption': displayCaption,
 			//'show-category': showCategory,
 			//wpnbha: true,
-			'intermedia-post-articles': true,
+			'jma-post-articles': true,
 		} );
-		// let classItems = ' intermedia-post-articles is-image-' + imageAlignment;
+		// let classItems = ' jma-post-articles is-image-' + imageAlignment;
 		// if ( displayFeaturedImage ) {
 		// 	classItems = classItems + ' show-image';
 		// }
@@ -335,25 +332,25 @@ class Edit extends Component {
 				if ( template === 'is-style-contributor' ) {
 					return (
 						<article key className={ this.buildClassesArticle() + featuredMedia } style={ this.buildInlineStyleArticle() } >
-							{ displayFeaturedImage && imageAlignment === 'behind' && this.renderFeaturedImage( post.intermedia_featured_image_src, post.intermedia_featured_image_caption ) }
+							{ displayFeaturedImage && imageAlignment === 'behind' && this.renderFeaturedImage( post.jma_featured_image_src, post.jma_featured_image_caption ) }
 							<div className="entry-wrapper" style={ { color: textColor.color } } >
 								<div className={ 'entry-meta contributor' } >
-									{ displayAuthor && this.renderAuthor( post.intermedia_author_info ) }
+									{ displayAuthor && this.renderAuthor( post.jma_author_info ) }
 									{ displayDate && this.renderdate( post.date_gmt ) }
 								</div>
 								<div className="content-contributor">
-									{ post.intermedia_category_info.length && displayCategory && (
+									{ post.jma_category_info.length && displayCategory && (
 										<div className={ 'cat-links ' + 'has-' + textColor + '-color' } >
-											<a href="#">{ decodeEntities( post.intermedia_category_info ) }</a>
+											<a href="#">{ decodeEntities( post.jma_category_info ) }</a>
 										</div>
 									) }
 									{ RichText.isEmpty( titleSection ) ? (
-										<h2 key="title" className={ 'entry-title' } style={ { color: headerColor.color } }>
-											<a href="#">{ titleTrimmed }</a>
+										<h2 key="title" className={ 'entry-title' } >
+											<a href="#" style={ { color: headerColor.color } } >{ titleTrimmed }</a>
 										</h2>
 									) : (
-										<h3 key="title" className={ 'entry-title' } style={ { color: headerColor.color } }>
-											<a href="#">{ titleTrimmed }</a>
+										<h3 key="title" className={ 'entry-title' } >
+											<a href="#" style={ { color: headerColor.color } } >{ titleTrimmed }</a>
 										</h3>
 									) }
 									{ IS_SUBTITLE_SUPPORTED_IN_THEME && displaySubtitle && (
@@ -367,25 +364,25 @@ class Edit extends Component {
 				}
 				return (
 					<article key className={ this.buildClassesArticle() } style={ this.buildInlineStyleArticle() } >
-						{ displayFeaturedImage && this.renderFeaturedImage( post.intermedia_featured_image_src, post.intermedia_featured_image_caption ) }
+						{ displayFeaturedImage && this.renderFeaturedImage( post.jma_featured_image_src, post.jma_featured_image_caption ) }
 						<div className="entry-wrapper" style={ { color: textColor.color } } >
 							{ IS_SPONSORED_CONTENT_SUPPORTED && displaySponsoredContentBadge && postType === 'sponsored_content' && (
 								<div className={ 'sponsored-content-badge' } >
 									<span>{ sponsoredContentBadgeMessage }</span>
 								</div>
 							) }
-							{ post.intermedia_category_info.length && displayCategory && (
+							{ post.jma_category_info.length && displayCategory && (
 								<div className={ 'cat-links' } style={ { color: textColor.color } } >
-									<a href="#">{ decodeEntities( post.intermedia_category_info ) }</a>
+									<a href="#">{ decodeEntities( post.jma_category_info ) }</a>
 								</div>
 							) }
 							{ RichText.isEmpty( titleSection ) ? (
-								<h2 key="title" className={ 'entry-title' } style={ { color: headerColor.color } }>
-									<a href="#">{ titleTrimmed }</a>
+								<h2 key="title" className={ 'entry-title' } >
+									<a href="#" style={ { color: headerColor.color } } >{ titleTrimmed }</a>
 								</h2>
 							) : (
-								<h3 key="title" className={ 'entry-title' } style={ { color: headerColor.color } }>
-									<a href="#">{ titleTrimmed }</a>
+								<h3 key="title" className={ 'entry-title' } >
+									<a href="#" style={ { color: headerColor.color } } >{ titleTrimmed }</a>
 								</h3>
 							) }
 							{ IS_SUBTITLE_SUPPORTED_IN_THEME && displaySubtitle && (
@@ -393,12 +390,12 @@ class Edit extends Component {
 							) }
 							{ displayExcerpt && this.renderExcerpt( post ) }
 							<div className={ 'entry-meta' } >
-								{ displayAuthor && this.renderAuthor( post.intermedia_author_info ) }
+								{ displayAuthor && this.renderAuthor( post.jma_author_info ) }
 								{ displayDate && this.renderdate( post.date_gmt ) }
 							</div>
-							{ IS_SPONSORED_CONTENT_SUPPORTED && post.meta.intermedia_sponsored_content.length !== 0 && (
+							{ IS_SPONSORED_CONTENT_SUPPORTED && post.meta.jma_sponsored_content.length !== 0 && (
 								<div className={ 'entry-meta' } >
-									<small>{ sponsoredContentMessage } <span><strong>{ post.meta.intermedia_sponsored_content[ 0 ].name }</strong></span></small>
+									<small>{ sponsoredContentMessage } <span><strong>{ post.meta.jma_sponsored_content[ 0 ].name }</strong></span></small>
 								</div>
 							) }
 						</div>
@@ -425,7 +422,7 @@ class Edit extends Component {
 				return (
 					<div key="article">
 						<article key className={ this.buildClassesArticle() + featuredMedia } style={ this.buildInlineStyleArticle() } >
-							{ displayPageFeaturedImage && this.renderFeaturedImage( post.intermedia_featured_image_src, post.intermedia_featured_image_caption ) }
+							{ displayPageFeaturedImage && this.renderFeaturedImage( post.jma_featured_image_src, post.jma_featured_image_caption ) }
 							<div className="entry-wrapper">
 								{ displayPageTitle && <h3 className="entry-title">
 									<a href="#" rel="bookmark" className={ headerColor + ' has-' + headerColor + '-color' } style={ { color: customHeaderColor } }>
@@ -859,13 +856,13 @@ class Edit extends Component {
 		const blockControls = [
 			{
 				icon: 'list-view',
-				title: __( 'List View', 'intermedia-blocks' ),
+				title: __( 'List View', 'jma-blocks' ),
 				onClick: () => setAttributes( { postsView: 'list' } ),
 				isActive: postsView === 'list',
 			},
 			{
 				icon: 'grid-view',
-				title: __( 'Grid View', 'intermedia-blocks' ),
+				title: __( 'Grid View', 'jma-blocks' ),
 				onClick: () => setAttributes( { postsView: 'grid' } ),
 				isActive: postsView === 'grid',
 			},
@@ -873,25 +870,25 @@ class Edit extends Component {
 		const blockControlsImages = [
 			{
 				icon: 'align-none',
-				title: __( 'Show media on top', 'intermedia-blocks' ),
+				title: __( 'Show media on top', 'jma-blocks' ),
 				isActive: imageAlignment === 'top',
 				onClick: () => setAttributes( { imageAlignment: 'top' } ),
 			},
 			{
 				icon: 'align-pull-left',
-				title: __( 'Show media on left', 'intermedia-blocks' ),
+				title: __( 'Show media on left', 'jma-blocks' ),
 				isActive: imageAlignment === 'left',
 				onClick: () => setAttributes( { imageAlignment: 'left' } ),
 			},
 			{
 				icon: 'align-pull-right',
-				title: __( 'Show media on right', 'intermedia-blocks' ),
+				title: __( 'Show media on right', 'jma-blocks' ),
 				isActive: imageAlignment === 'right',
 				onClick: () => setAttributes( { imageAlignment: 'right' } ),
 			},
 			{
 				icon: coverIcon,
-				title: __( 'Show media behind', 'intermedia-blocks' ),
+				title: __( 'Show media behind', 'jma-blocks' ),
 				isActive: imageAlignment === 'behind',
 				onClick: () => setAttributes( { imageAlignment: 'behind' } ),
 			},
@@ -899,25 +896,25 @@ class Edit extends Component {
 		const blockControlsImageShape = [
 			{
 				icon: landscapeIcon,
-				title: __( 'Landscape Image Shape', 'intermedia-blocks' ),
+				title: __( 'Landscape Image Shape', 'jma-blocks' ),
 				isActive: imageShape === 'landscape',
 				onClick: () => setAttributes( { imageShape: 'landscape' } ),
 			},
 			{
 				icon: portraitIcon,
-				title: __( 'portrait Image Shape', 'intermedia-blocks' ),
+				title: __( 'portrait Image Shape', 'jma-blocks' ),
 				isActive: imageShape === 'portrait',
 				onClick: () => setAttributes( { imageShape: 'portrait' } ),
 			},
 			{
 				icon: squareIcon,
-				title: __( 'Square Image Shape', 'intermedia-blocks' ),
+				title: __( 'Square Image Shape', 'jma-blocks' ),
 				isActive: imageShape === 'square',
 				onClick: () => setAttributes( { imageShape: 'square' } ),
 			},
 			{
 				icon: uncroppedIcon,
-				title: __( 'Uncropped', 'intermedia-blocks' ),
+				title: __( 'Uncropped', 'jma-blocks' ),
 				isActive: imageShape === 'uncropped',
 				onClick: () => setAttributes( { imageShape: 'uncropped' } ),
 			},
@@ -1015,7 +1012,7 @@ export default compose( [
 				{
 					post_type: postType,
 					per_page: postsAmount,
-					metaKey: 'intermedia_sponsored_content', // filter by metadata
+					metaKey: 'jma_sponsored_content', // filter by metadata
 					metaValue: metaValue,
 					metaCompare: 'LIKE',
 					order: order,
@@ -1041,9 +1038,10 @@ export default compose( [
 				( value ) => ! isUndefined( value )
 			);
 		}
+		//console.log ( postsQuery, postType );
 		return {
-			customPosts: select( 'core' ).getEntityRecords( 'intermedia-blocks-post/v1', 'intermedia-blocks-posts', postsQuery ),
-			version: 'Intermedia Block Post // Version: 1.5.0',
+			customPosts: select( 'core' ).getEntityRecords( 'jma-blocks-post/v1', 'jma-blocks-posts', postsQuery ),
+			version: 'JMA Block Post // Version: 1.1.0',
 		};
 	} ),
 ] )( Edit );

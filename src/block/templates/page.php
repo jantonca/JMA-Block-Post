@@ -30,7 +30,7 @@ call_user_func(
             $classes = array();
             $styles = '';
             // Add classes based on the post's assigned categories and tags.
-            $classes[] = IntermediaBlockPost::get_term_classes( get_the_ID() );
+            $classes[] = JMABlockPost::get_term_classes( get_the_ID() );
     
             // Add classes from attributes
             $classes[] = $attributes->classesArticle;
@@ -45,7 +45,7 @@ call_user_func(
             }
             $image_size = 'newspack-article-block-uncropped';
             if ( has_post_thumbnail() && 'uncropped' !== $attributes->imageShape ) {
-                $image_size = IntermediaBlockPost::image_size_for_orientation( $attributes->imageShape );
+                $image_size = JMABlockPost::image_size_for_orientation( $attributes->imageShape );
             }
             $thumbnail_args = '';
             // If the image position is behind, pass the object-fit setting to maintain styles with AMP.

@@ -1,6 +1,6 @@
 <?php
 
-class IntermediaBlockPost {
+class JMABlockPost {
 
     // Properties
     public $attributes;
@@ -277,7 +277,7 @@ class IntermediaBlockPost {
 	 *
 	 * @return string Returns the thumbnail key to use.
 	 */
-	public static function intermedia_custom_excerpt ( $excerptLength, $showExcerptMore, $excerptReadMore ) {
+	public static function jma_custom_excerpt ( $excerptLength, $showExcerptMore, $excerptReadMore ) {
 
 		$excerpt_raw = get_the_excerpt();
 		$words_trim = $excerptLength;
@@ -314,4 +314,4 @@ class IntermediaBlockPost {
 	}
 
 }
-IntermediaBlockPost::init();
+JMABlockPost::init();

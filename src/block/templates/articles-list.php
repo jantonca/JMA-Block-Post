@@ -9,7 +9,7 @@
 
 call_user_func(
 	function( $data ) {
-		echo IntermediaBlockPost::template_inc( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo JMABlockPost::template_inc( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			__DIR__ . '/articles-loop.php',
 			$data
 		);

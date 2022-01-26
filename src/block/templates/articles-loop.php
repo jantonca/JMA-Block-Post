@@ -10,7 +10,6 @@
 
 call_user_func(
 	function( $data ) {
-
 		global $wp_query;
 		$main_query = $wp_query;
         wp_reset_postdata();
@@ -27,7 +26,7 @@ call_user_func(
 			$article_query->the_post();
 			$newspack_blocks_post_id[ get_the_ID() ] = true;
 			$post_counter++;
-			echo IntermediaBlockPost::template_inc( __DIR__ . '/article'.$template_name.'.php', array( 'attributes' => $attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo JMABlockPost::template_inc( __DIR__ . '/article'.$template_name.'.php', array( 'attributes' => $attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 		$wp_query = $main_query; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		wp_reset_postdata();

@@ -92,6 +92,7 @@ class API_Block_Post {
 				],
 				'featured_media' => (int) get_post_thumbnail_id( $post->ID ),
 				'id'             => $post->ID,
+				'post_type'		 => $post->post_type,
 				'meta'           => $meta->get_value( $post->ID, $request ),
 				'title'          => [
 					'rendered' => get_the_title( $post->ID ),
@@ -99,16 +100,22 @@ class API_Block_Post {
 			];
 
             $add_ons = [
-                'intermedia_featured_image_src'     => Block_helper::intermedia_blocks_get_image_src( $data ),
-                'intermedia_featured_image_caption' => Block_helper::intermedia_blocks_get_image_caption( $data ),
-                'intermedia_category_info'          => Block_helper::intermedia_blocks_get_primary_category( $data ),
-                'intermedia_article_classes'        => Block_helper::intermedia_blocks_get_cat_tag_classes( $data['id'] ),
-                'intermedia_author_info'            => Block_helper::intermedia_blocks_get_author_info( $data ),
+                'jma_featured_image_src'     => Block_helper::jma_blocks_get_image_src( $data ),
+                'jma_featured_image_caption' => Block_helper::jma_blocks_get_image_caption( $data ),
+                'jma_category_info'          => Block_helper::jma_blocks_get_primary_category( $data ),
+                'jma_article_classes'        => Block_helper::jma_blocks_get_cat_tag_classes( $data['id'] ),
+                'jma_author_info'            => Block_helper::jma_blocks_get_author_info( $data ),
             ];
+
+			if ( $post->post_type === 'tribe_events' ) {
+				$add_ons['jma_event_start_date'] = tribe_get_start_date( $post->ID, false, 'j F Y' );
+			}
+
 			$posts[] = array_merge( $data, $add_ons );
 		}
 
 		return new \WP_REST_Response( $posts );
+
 	}
 
 }

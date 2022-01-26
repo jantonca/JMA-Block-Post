@@ -15,8 +15,8 @@ const { Component } = wp.element;
 let IS_SPONSORED_CONTENT_SUPPORTED;
 if (
 	typeof window === 'object' &&
-	window.intermediaSponsoredContentGlobalObject &&
-	window.intermediaSponsoredContentGlobalObject.sponsored_content_support
+	window.jmaSponsoredContentGlobalObject &&
+	window.jmaSponsoredContentGlobalObject.sponsored_content_support
 ) {
 	IS_SPONSORED_CONTENT_SUPPORTED = true;
 }
@@ -39,7 +39,7 @@ class QueryPostControls extends Component {
 		} ).then( function( pages ) {
 			return pages.map( page => ( {
 				value: page.id,
-				label: decodeEntities( page.title ) || __( '(no name)', 'intermedia-blocks' ),
+				label: decodeEntities( page.title ) || __( '(no name)', 'jma-blocks' ),
 			} ) );
 		} );
 	};
@@ -53,7 +53,7 @@ class QueryPostControls extends Component {
 		} ).then( function( pages ) {
 			return pages.map( page => ( {
 				value: page.id,
-				label: decodeEntities( page.title.rendered ) || __( '(no name)', 'intermedia-blocks' ),
+				label: decodeEntities( page.title.rendered ) || __( '(no name)', 'jma-blocks' ),
 			} ) );
 		} );
 	};
@@ -67,7 +67,7 @@ class QueryPostControls extends Component {
 		} ).then( function( users ) {
 			return users.map( user => ( {
 				value: user.id,
-				label: decodeEntities( user.name ) || __( '(no name)', 'intermedia-blocks' ),
+				label: decodeEntities( user.name ) || __( '(no name)', 'jma-blocks' ),
 			} ) );
 		} );
 	};
@@ -81,7 +81,7 @@ class QueryPostControls extends Component {
 		} ).then( function( users ) {
 			return users.map( user => ( {
 				value: user.id,
-				label: decodeEntities( user.name ) || __( '(no name)', 'intermedia-blocks' ),
+				label: decodeEntities( user.name ) || __( '(no name)', 'jma-blocks' ),
 			} ) );
 		} );
 	};
@@ -97,7 +97,7 @@ class QueryPostControls extends Component {
 		} ).then( function( categories ) {
 			return categories.map( category => ( {
 				value: category.id,
-				label: decodeEntities( category.name ) || __( '(no title)', 'intermedia-blocks' ),
+				label: decodeEntities( category.name ) || __( '(no title)', 'jma-blocks' ),
 			} ) );
 		} );
 	};
@@ -111,7 +111,7 @@ class QueryPostControls extends Component {
 		} ).then( function( categories ) {
 			return categories.map( category => ( {
 				value: category.id,
-				label: decodeEntities( category.name ) || __( '(no title)', 'intermedia-blocks' ),
+				label: decodeEntities( category.name ) || __( '(no title)', 'jma-blocks' ),
 			} ) );
 		} );
 	};
@@ -127,7 +127,7 @@ class QueryPostControls extends Component {
 		} ).then( function( tags ) {
 			return tags.map( tag => ( {
 				value: tag.id,
-				label: decodeEntities( tag.name ) || __( '(no title)', 'intermedia-blocks' ),
+				label: decodeEntities( tag.name ) || __( '(no title)', 'jma-blocks' ),
 			} ) );
 		} );
 	};
@@ -141,7 +141,7 @@ class QueryPostControls extends Component {
 		} ).then( function( tags ) {
 			return tags.map( tag => ( {
 				value: tag.id,
-				label: decodeEntities( tag.name ) || __( '(no title)', 'intermedia-blocks' ),
+				label: decodeEntities( tag.name ) || __( '(no title)', 'jma-blocks' ),
 			} ) );
 		} );
 	};
@@ -184,7 +184,7 @@ class QueryPostControls extends Component {
 					help="Select a post type for the query."
 					value={ postType }
 					onChange={ onPostTypeChange }
-					options={ window.intermediaGlobalObject.post_types.map( type => {
+					options={ window.jmaGlobalObject.post_types.map( type => {
 						return { value: type.value, label: type.label };
 					} )
 					}
@@ -210,7 +210,7 @@ class QueryPostControls extends Component {
 				help="Select a post type for the query."
 				value={ postType }
 				onChange={ onPostTypeChange }
-				options={ window.intermediaGlobalObject.post_types.map( type => {
+				options={ window.jmaGlobalObject.post_types.map( type => {
 					return { value: type.value, label: type.label };
 				} )
 				}
@@ -223,7 +223,7 @@ class QueryPostControls extends Component {
 					help="Select a Sponsored Content position."
 					value={ metaValue }
 					onChange={ onMetaValueChange }
-					options={ window.intermediaSponsoredContentGlobalObject.sponsored_content_positions.map( position => {
+					options={ window.jmaSponsoredContentGlobalObject.sponsored_content_positions.map( position => {
 						return { value: position.value, label: position.label };
 					} )
 					}

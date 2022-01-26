@@ -1,19 +1,24 @@
 <?php
 
-    function render_dynamic_intermedia_block_post( $attributes ) {
+    function render_dynamic_jma_block_post( $attributes ) {
 
 		//Initializing Block
-        $block= new IntermediaBlockPost( $attributes );
+        $block= new JMABlockPost( $attributes );
 		$article_query = new WP_Query( $block->build_posts_query() );
 		
         /* BEGIN HTML OUTPUT */
         ob_start(); // Turn on output buffering
-
+		$args = array(
+			'public'   => true,
+			'_builtin' => false
+			 
+		); 
+		// phpcs:ignore$taxonomies = get_taxonomies( $args );
+		// phpcs:ignorevar_dump($taxonomies);
         if ( $article_query->have_posts() ) :
 
 ?>
-		<div
-			class="<?php echo esc_attr( $block->classesContainer ); ?>"
+		<div class="<?php echo esc_attr( $block->classesContainer ); ?>"
 			>
 			<div class="container-box" data-posts>
 				<?php if ( isset( $block->titleSection ) ) : ?>
@@ -23,7 +28,7 @@
 				<?php endif; ?>
 				<?php
 				if( $block->postType !== 'page' ):
-					echo IntermediaBlockPost::template_inc(
+					echo JMABlockPost::template_inc( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						__DIR__ . '/templates/articles-list.php',
 						[
 							'article_query'     => $article_query,
@@ -32,7 +37,7 @@
 					);
 				endif;
 				if( $block->postType === 'page' ):
-					echo IntermediaBlockPost::template_inc(
+					echo JMABlockPost::template_inc( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						__DIR__ . '/templates/page.php',
 						[
 							'article_query'     => $article_query,

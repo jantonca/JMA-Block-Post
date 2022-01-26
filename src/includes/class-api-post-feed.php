@@ -23,7 +23,7 @@ class Api_Post_Feed {
 
 			$posts_array[$key]['title'] = $remote_post->title->rendered;
 			$posts_array[$key]['link'] = $remote_post->link;
-			$posts_array[$key]['excerpt'] = strip_tags( $remote_post->excerpt->rendered );
+			$posts_array[$key]['excerpt'] = wp_strip_all_tags( stripslashes( $remote_post->excerpt->rendered ) );
 
 			if( isset( $remote_post->_embedded->{'wp:featuredmedia'} ) ) {
 				
@@ -33,9 +33,9 @@ class Api_Post_Feed {
 					$featured_image_src = 'https://via.placeholder.com/1200x900/000000/FFFFFF/?text=Wrong%20crop%20for%20this%20featured%20image';
 				}
 				$posts_array[$key]['featured_image']['src'] = $featured_image_src;
-				$featured_image_caption = strip_tags( $remote_post->_embedded->{'wp:featuredmedia'}[0]->caption->rendered );
+				$featured_image_caption = wp_strip_all_tags( stripslashes( $remote_post->_embedded->{'wp:featuredmedia'}[0]->caption->rendered ) );
 				$posts_array[$key]['featured_image']['caption'] = $featured_image_caption;
-				$featured_image_alt_text = strip_tags( $remote_post->_embedded->{'wp:featuredmedia'}[0]->alt_text );
+				$featured_image_alt_text = wp_strip_all_tags( stripslashes( $remote_post->_embedded->{'wp:featuredmedia'}[0]->alt_text ) );
 				$posts_array[$key]['featured_image']['alt_text'] = $featured_image_alt_text;
 			} else {
 				$featured_image_src = 'https://via.placeholder.com/1200x900/000000/FFFFFF/?text=No%20featured%20image%20available%20from%20the%20source';

@@ -9,12 +9,12 @@
 call_user_func(
 	function( $data ) {
 		$attributes = $data['attributes'];
-		$authors    = IntermediaBlockPost::display_authors();
+		$authors    = JMABlockPost::display_authors();
 		$classes    = array();
 		$styles     = '';
         //var_dump($attributes);
 		// Add classes based on the post's assigned categories and tags.
-		$classes[] = IntermediaBlockPost::get_term_classes( get_the_ID() );
+		$classes[] = JMABlockPost::get_term_classes( get_the_ID() );
 
 		// Add classes from attributes
         $classes[] = $attributes->classesArticle;
@@ -29,7 +29,7 @@ call_user_func(
 		}
 		$image_size = 'newspack-article-block-uncropped';
 		if ( has_post_thumbnail() && 'uncropped' !== $attributes->imageShape ) {
-			$image_size = IntermediaBlockPost::image_size_for_orientation( $attributes->imageShape );
+			$image_size = JMABlockPost::image_size_for_orientation( $attributes->imageShape );
 		}
 		$thumbnail_args = '';
 		// If the image position is behind, pass the object-fit setting to maintain styles with AMP.
@@ -81,7 +81,7 @@ call_user_func(
 
         if ( $text_color ) {
             $text_color = 'has-'.$text_color.'-color';
-            $text_color_class = 'class="'.$text_color.'"';
+            $text_color_class = $text_color;
         } else {
             $text_color = '';
             $text_color_class = '';
@@ -90,7 +90,7 @@ call_user_func(
         $custom_text_color = isset( $attributes->customTextColor ) ? $attributes->customTextColor : false;
 
         if ( $custom_text_color ) {
-            $text_color_style = 'style="color:'.$custom_text_color.';"';
+            $text_color_style = 'color:'.$custom_text_color.';';
         } else {
             $text_color_style ='';
         }
@@ -117,7 +117,7 @@ call_user_func(
             <div class="entry-wrapper">
                 <?php if ( $attributes->displayAuthor || $attributes->displayDate ) :
                     ?>
-                    <div class="entry-meta contributor <?php echo $text_color; ?>" <?php echo $text_color_style; ?> >
+                    <div class="entry-meta contributor <?php echo esc_attr( $text_color ); ?>" style="<?php echo esc_attr( $text_color_style ); ?>" >
                         <?php
                         if ( $attributes->displayAuthor ) :
                             if ( $attributes->displayAuthorAvatar ) :
@@ -172,7 +172,7 @@ call_user_func(
                 <?php endif; ?>
                 <div class="content-contributor">
                     <?php if ( $showCategory && $category ) : ?>
-                        <div class="cat-links <?php echo $text_color; ?>" <?php echo $text_color_style; ?> >
+                        <div class="cat-links <?php echo esc_attr( $text_color ); ?>" style="<?php echo esc_attr( $text_color_style ); ?>" >
                             <a href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>">
                                 <?php echo esc_html( $category->name ); ?>
                             </a>
@@ -189,7 +189,7 @@ call_user_func(
                     <?php
                     if ( $show_subtitle ) : ?>
 
-                        <div class="newspack-post-subtitle newspack-post-subtitle--in-homepage-block <?php echo $text_color; ?>">
+                        <div class="newspack-post-subtitle newspack-post-subtitle--in-homepage-block <?php echo esc_attr( $text_color ); ?>">
                             <?php echo esc_html( get_post_meta( get_the_ID(), 'newspack_post_subtitle', true ) ); ?>
                         </div>
 
@@ -197,7 +197,9 @@ call_user_func(
                     <?php
                     if ( $attributes->displayExcerpt ) : ?>
 
-                        <p <?php echo $text_color_class; ?> <?php echo $text_color_style; ?> ><?php echo IntermediaBlockPost::intermedia_custom_excerpt( $attributes->excerptLength, $attributes->displayExcerptMore, $attributes->excerptReadMore ); ?></p>
+                        <p class="<?php echo esc_attr( $text_color_class ); ?>" style="<?php echo esc_attr( $text_color_style ); ?>" >
+                            <?php echo JMABlockPost::jma_custom_excerpt( $attributes->excerptLength, $attributes->displayExcerptMore, $attributes->excerptReadMore ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                        </p>
 
                     <?php endif; ?>
                 </div>

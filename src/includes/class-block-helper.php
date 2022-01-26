@@ -59,7 +59,7 @@ class Block_helper {
             );
         }
 
-        return apply_filters( 'intermedia_post_types', $options );
+        return apply_filters( 'jma_post_types', $options );
 
     }
 
@@ -69,7 +69,7 @@ class Block_helper {
 	 * @param array $object The object info.
 	 * @return array | bool Featured image if available, false if not.
 	 */
-	public static function intermedia_blocks_get_image_src( $object ) {
+	public static function jma_blocks_get_image_src( $object ) {
 
 		$featured_image_set = [];
 
@@ -86,7 +86,7 @@ class Block_helper {
 		$featured_image_set['large'] = $feat_img_array_large[0];
 
 		// Landscape image.
-		$landscape_size = IntermediaBlockPost::image_size_for_orientation( 'landscape' );
+		$landscape_size = JMABlockPost::image_size_for_orientation( 'landscape' );
 		$feat_img_array_landscape = wp_get_attachment_image_src(
 			$object['featured_media'],
 			$landscape_size,
@@ -95,7 +95,7 @@ class Block_helper {
 		$featured_image_set['landscape'] = $feat_img_array_landscape[0];
 
 		// Portrait image.
-		$portrait_size = IntermediaBlockPost::image_size_for_orientation( 'portrait' );
+		$portrait_size = JMABlockPost::image_size_for_orientation( 'portrait' );
 		$feat_img_array_portrait = wp_get_attachment_image_src(
 			$object['featured_media'],
 			$portrait_size,
@@ -104,7 +104,7 @@ class Block_helper {
 		$featured_image_set['portrait'] = $feat_img_array_portrait[0];
 
 		// Square image.
-		$square_size = IntermediaBlockPost::image_size_for_orientation( 'square' );
+		$square_size = JMABlockPost::image_size_for_orientation( 'square' );
 		$feat_img_array_square = wp_get_attachment_image_src(
 			$object['featured_media'],
 			$square_size,
@@ -131,7 +131,7 @@ class Block_helper {
 	 * @param array $object The object info.
 	 * @return string|null Image caption on success, null on failure.
 	 */
-	public static function intermedia_blocks_get_image_caption( $object ) {
+	public static function jma_blocks_get_image_caption( $object ) {
 		return (int) $object['featured_media'] > 0 ? trim( wp_get_attachment_caption( $object['featured_media'] ) ) : null;
 	}
 
@@ -141,7 +141,7 @@ class Block_helper {
 	 * @param array $object The object info.
 	 * @return array Author data.
 	 */
-	public static function intermedia_blocks_get_author_info( $object ) {
+	public static function jma_blocks_get_author_info( $object ) {
 		$author_data = [];
 
 		if ( function_exists( 'coauthors_posts_links' ) && ! empty( get_coauthors() ) ) :
@@ -198,7 +198,7 @@ class Block_helper {
 	 * @param array $object The object info.
 	 * @return string Category name.
 	 */
-	public static function intermedia_blocks_get_primary_category( $object ) {
+	public static function jma_blocks_get_primary_category( $object ) {
 		$category = false;
 
 		// Use Yoast primary category if set.
@@ -230,8 +230,8 @@ class Block_helper {
 	 * @param array $object The object info.
 	 * @return string classes from assigned categories and tags.
 	 */
-	public static function intermedia_blocks_get_cat_tag_classes( $object ) {
-		return IntermediaBlockPost::get_term_classes( $object['id'] );
+	public static function jma_blocks_get_cat_tag_classes( $object ) {
+		return JMABlockPost::get_term_classes( $object['id'] );
 	}
 
 }
