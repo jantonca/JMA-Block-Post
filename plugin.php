@@ -5,7 +5,7 @@
  * Description: This is a plugin for displaying posts and CPT in WordPress templates using a Gutenberg custom block.
  * Author: Jose Anton
  * Author URI: https://jma.com.au
- * Version: 1.4.2
+ * Version: 1.4.3
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
